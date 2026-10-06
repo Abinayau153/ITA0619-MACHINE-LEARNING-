@@ -1,0 +1,144 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOZLgftzAHLNv1h/Ud5ElYY",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Abinayau153/ITA0619-MACHINE-LEARNING-/blob/main/EXPERIMENT%2001%20S%20ALGORITHM\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "o7bBBFiLC3G7",
+        "outputId": "8f5d2a64-56ea-4ab1-ddb1-bde4e5adc16f"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "FIND-S ALGORITHM\n",
+            "-----------------------------\n",
+            "Initial Hypothesis: ['0', '0', '0', '0', '0', '0']\n",
+            "\n",
+            "Step 1\n",
+            "Training Example: ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same', 'Yes']\n",
+            "Class = Yes\n",
+            "Positive example found\n",
+            "Position 1 updated to Sunny\n",
+            "Position 2 updated to Warm\n",
+            "Position 3 updated to Normal\n",
+            "Position 4 updated to Strong\n",
+            "Position 5 updated to Warm\n",
+            "Position 6 updated to Same\n",
+            "Hypothesis after this example: ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same']\n",
+            "\n",
+            "Step 2\n",
+            "Training Example: ['Sunny', 'Warm', 'High', 'Strong', 'Warm', 'Same', 'Yes']\n",
+            "Class = Yes\n",
+            "Positive example found\n",
+            "Position 3 has different value\n",
+            "Updated to ?\n",
+            "Hypothesis after this example: ['Sunny', 'Warm', '?', 'Strong', 'Warm', 'Same']\n",
+            "\n",
+            "Step 3\n",
+            "Training Example: ['Rainy', 'Cold', 'High', 'Strong', 'Warm', 'Change', 'No']\n",
+            "Class = No\n",
+            "Negative example ignored\n",
+            "\n",
+            "Step 4\n",
+            "Training Example: ['Sunny', 'Warm', 'High', 'Strong', 'Cool', 'Change', 'Yes']\n",
+            "Class = Yes\n",
+            "Positive example found\n",
+            "Position 3 has different value\n",
+            "Updated to ?\n",
+            "Position 5 has different value\n",
+            "Updated to ?\n",
+            "Position 6 has different value\n",
+            "Updated to ?\n",
+            "Hypothesis after this example: ['Sunny', 'Warm', '?', 'Strong', '?', '?']\n",
+            "\n",
+            "-----------------------------\n",
+            "FINAL MOST SPECIFIC HYPOTHESIS\n",
+            "['Sunny', 'Warm', '?', 'Strong', '?', '?']\n"
+          ]
+        }
+      ],
+      "source": [
+        "# FIND-S ALGORITHM\n",
+        "\n",
+        "data = [\n",
+        "    ['Sunny', 'Warm', 'Normal', 'Strong', 'Warm', 'Same', 'Yes'],\n",
+        "    ['Sunny', 'Warm', 'High', 'Strong', 'Warm', 'Same', 'Yes'],\n",
+        "    ['Rainy', 'Cold', 'High', 'Strong', 'Warm', 'Change', 'No'],\n",
+        "    ['Sunny', 'Warm', 'High', 'Strong', 'Cool', 'Change', 'Yes']\n",
+        "]\n",
+        "\n",
+        "h = ['0', '0', '0', '0', '0', '0']\n",
+        "\n",
+        "print(\"FIND-S ALGORITHM\")\n",
+        "print(\"-----------------------------\")\n",
+        "print(\"Initial Hypothesis:\", h)\n",
+        "\n",
+        "step = 1\n",
+        "\n",
+        "for row in data:\n",
+        "\n",
+        "    print(\"\\nStep\", step)\n",
+        "    print(\"Training Example:\", row)\n",
+        "\n",
+        "    if row[-1] == 'Yes':\n",
+        "\n",
+        "        print(\"Class = Yes\")\n",
+        "        print(\"Positive example found\")\n",
+        "\n",
+        "        for i in range(6):\n",
+        "\n",
+        "            if h[i] == '0':\n",
+        "                h[i] = row[i]\n",
+        "                print(\"Position\", i + 1, \"updated to\", h[i])\n",
+        "\n",
+        "            elif h[i] != row[i]:\n",
+        "                h[i] = '?'\n",
+        "                print(\"Position\", i + 1, \"has different value\")\n",
+        "                print(\"Updated to ?\")\n",
+        "\n",
+        "        print(\"Hypothesis after this example:\", h)\n",
+        "\n",
+        "    else:\n",
+        "        print(\"Class = No\")\n",
+        "        print(\"Negative example ignored\")\n",
+        "\n",
+        "    step += 1\n",
+        "\n",
+        "print(\"\\n-----------------------------\")\n",
+        "print(\"FINAL MOST SPECIFIC HYPOTHESIS\")\n",
+        "print(h)"
+      ]
+    }
+  ]
+}
