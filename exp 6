@@ -1,0 +1,91 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPUqPm2fWXNi1fMzhneHMsW",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Abinayau153/ITA0619-MACHINE-LEARNING-/blob/main/exp%206\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "eCairCUJd9bl",
+        "outputId": "b0eb779e-f3ef-4ffd-8df7-0bf2f1daf4b4"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Predicted values:\n",
+            "[1 0 2 1 1 0 1 2 1 1 2 0 0 0 0 1 2 1 1 2 0 2 0 2 2 2 2 2 0 0]\n",
+            "\n",
+            "Confusion Matrix:\n",
+            "[[10  0  0]\n",
+            " [ 0  9  0]\n",
+            " [ 0  0 11]]\n",
+            "\n",
+            "Accuracy:\n",
+            "1.0\n"
+          ]
+        }
+      ],
+      "source": [
+        "from sklearn.datasets import load_iris\n",
+        "from sklearn.model_selection import train_test_split\n",
+        "from sklearn.naive_bayes import GaussianNB\n",
+        "from sklearn.metrics import accuracy_score, confusion_matrix\n",
+        "\n",
+        "# Load dataset\n",
+        "iris = load_iris()\n",
+        "X = iris.data\n",
+        "y = iris.target\n",
+        "\n",
+        "# Split data\n",
+        "X_train, X_test, y_train, y_test = train_test_split(\n",
+        "    X, y, test_size=0.2, random_state=42\n",
+        ")\n",
+        "\n",
+        "# Naive Bayes model\n",
+        "model = GaussianNB()\n",
+        "model.fit(X_train, y_train)\n",
+        "\n",
+        "# Prediction\n",
+        "y_pred = model.predict(X_test)\n",
+        "\n",
+        "print(\"Predicted values:\")\n",
+        "print(y_pred)\n",
+        "\n",
+        "print(\"\\nConfusion Matrix:\")\n",
+        "print(confusion_matrix(y_test, y_pred))\n",
+        "\n",
+        "print(\"\\nAccuracy:\")\n",
+        "print(accuracy_score(y_test, y_pred))"
+      ]
+    }
+  ]
+}
