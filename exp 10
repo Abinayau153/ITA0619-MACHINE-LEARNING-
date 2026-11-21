@@ -1,0 +1,89 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyPBdNkE72bjn6qShCp7q58J",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Abinayau153/ITA0619-MACHINE-LEARNING-/blob/main/exp%2010\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 2,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "h9hDkZBk0a52",
+        "outputId": "55c33703-ada6-4d81-cc99-eeba0e6a43b8"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Data and Cluster:\n",
+            "1 -> Cluster 1\n",
+            "2 -> Cluster 1\n",
+            "3 -> Cluster 1\n",
+            "4 -> Cluster 1\n",
+            "10 -> Cluster 0\n",
+            "11 -> Cluster 0\n",
+            "12 -> Cluster 0\n",
+            "13 -> Cluster 0\n",
+            "\n",
+            "Cluster Means:\n",
+            "[[11.5]\n",
+            " [ 2.5]]\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Expectation Maximization Algorithm\n",
+        "\n",
+        "import numpy as np\n",
+        "from sklearn.mixture import GaussianMixture\n",
+        "\n",
+        "# Dataset\n",
+        "X = np.array([\n",
+        "    [1], [2], [3], [4], [10], [11], [12], [13]\n",
+        "    ])\n",
+        "\n",
+        "# Create EM model\n",
+        "model = GaussianMixture(n_components=2, random_state=0)\n",
+        "\n",
+        "# Train model\n",
+        "model.fit(X)\n",
+        "\n",
+        "# Predict clusters\n",
+        "clusters = model.predict(X)\n",
+        "\n",
+        "print(\"Data and Cluster:\")\n",
+        "for i in range(len(X)):\n",
+        "    print(X[i][0], \"-> Cluster\", clusters[i])\n",
+        "\n",
+        "print(\"\\nCluster Means:\")\n",
+        "print(model.means_)"
+      ]
+    }
+  ]
+}
